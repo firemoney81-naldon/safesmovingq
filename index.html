@@ -1,23 +1,882 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
+
+
+    <!-- Schema.org JSON-LD 구조화 데이터 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "LocalBusiness",
+          "@id": "https://example.com/gwangyang-moving#business",
+          "name": "광양이사 전문 종합비교센터",
+          "description": "전라남도 광양시 전 지역(중마동, 광양읍, 성황동, 금호동 등) 아파트, 빌라, 원룸, 사무실 포장이사 및 일반이사 맞춤형 가격 비교 분석 센터",
+          "areaServed": [
+            {
+              "@type": "AdministrativeArea",
+              "name": "전라남도 광양시"
+            }
+          ],
+          "serviceArea": "광양시 전역 및 순천, 여수 인접권",
+          "priceRange": "KRW 350,000 - 2,500,000"
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://example.com/gwangyang-moving#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "광양 지역 포장이사 평균 비용은 얼마인가요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "2027년 기준 광양 시내 포장이사 평균 비용은 짐량과 평형대에 따라 결정됩니다. 원룸(1톤 기준)은 약 35만 원에서 50만 원 선이며, 24평형 아파트(5톤 탑차 기준)는 약 95만 원에서 125만 원, 34평형(6톤 내외)은 130만 원에서 165만 원 사이로 형성되어 있습니다. 사다리차 이용료 및 손 없는 날 여부에 따라 추가 요금이 발생할 수 있습니다."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "중마동 신축 아파트와 광양읍 구도심 주택의 이사 시 차이점은 무엇인가요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "중마동과 성황도이지구, 와우지구의 신축 고층 아파트는 엘리베이터 예약제 운영과 화물차 전용 진입로가 필수인 반면, 광양읍 구도심의 단독주택이나 연립빌라는 좁은 골목길로 인해 5톤 대형 트럭 대신 1톤 또는 2.5톤 분할 진입 및 사다리차 안착 공간 사전 확보가 핵심 과제입니다."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "이사 견적 비교 시 가장 확실하게 할인을 받는 방법은 무엇인가요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "월말이나 손 없는 날을 피해 평일 화요일에서 목요일 사이를 선택하고, 불필요한 폐기물을 사전에 정리하여 적재 톤수를 낮추는 것이 가장 효과적입니다. 또한 다이렉트 온라인 비교견적 시스템을 통해 최소 3개 이상 등록 관허 업체의 방문 견적을 대조하면 평균 15%에서 20%가량 지출을 절감할 수 있습니다."
+              }
+            }
+          ]
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://example.com/gwangyang-moving#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "홈",
+              "item": "https://example.com"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "지역별 이사 정보",
+              "item": "https://example.com/moving"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "광양이사 종합 가이드",
+              "item": "https://example.com/gwangyang-moving"
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Web Fonts: Noto Sans KR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #1d4ed8;
+            --primary-light: #eff6ff;
+            --primary-hover: #1e40af;
+            --secondary: #0d9488;
+            --secondary-light: #f0fdfa;
+            --accent: #d97706;
+            --text-dark: #0f172a;
+            --text-body: #334155;
+            --text-muted: #64748b;
+            --bg-page: #f8fafc;
+            --bg-card: #ffffff;
+            --border-light: #e2e8f0;
+            --border-focus: #93c5fd;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+            --radius-md: 10px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-body);
+            line-height: 1.8;
+            font-weight: 400;
+            font-size: 16px;
+            word-break: keep-all;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            color: #ffffff;
+            padding: 3.5rem 1.5rem 2.5rem;
+            text-align: center;
+            border-bottom: 4px solid var(--secondary);
+        }
+
+        .header-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: #e0e7ff;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+        }
+
+        nav {
+            background-color: #ffffff;
+            border-bottom: 1px solid var(--border-light);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0.5rem 1rem;
+            gap: 0.5rem;
+        }
+
+        nav a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.5rem 0.9rem;
+            border-radius: var(--radius-md);
+            transition: all 0.2s ease;
+        }
+
+        nav a:hover {
+            background-color: var(--primary-light);
+            color: var(--primary);
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 2.5rem auto;
+            padding: 0 1.5rem;
+        }
+
+        article {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 3rem 2.5rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-light);
+            margin-bottom: 3rem;
+        }
+
+        section {
+            padding: 2.5rem 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            color: var(--text-dark);
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.01em;
+            position: relative;
+            padding-left: 1rem;
+            border-left: 5px solid var(--primary);
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            font-weight: 700;
+            margin: 2rem 0 0.8rem;
+            letter-spacing: -0.01em;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            font-weight: 700;
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        p {
+            margin-bottom: 1.25rem;
+            color: var(--text-body);
+            text-align: justify;
+        }
+
+        .summary-box {
+            background-color: var(--primary-light);
+            border: 1px solid var(--border-focus);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .summary-box strong {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            margin: 2rem 0;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            color: var(--text-dark);
+            padding: 1rem 1.2rem;
+            font-weight: 700;
+            border-bottom: 2px solid var(--border-light);
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid var(--border-light);
+            color: var(--text-body);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:nth-child(even) {
+            background-color: #fafbfc;
+        }
+
+        ul, ol {
+            margin: 1rem 0 1.5rem 1.5rem;
+            color: var(--text-body);
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+            padding: 1.2rem;
+            background-color: #f8fafc;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-light);
+        }
+
+        .tag-cloud span {
+            background-color: #ffffff;
+            color: var(--text-muted);
+            border: 1px solid var(--border-light);
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .calculator-card {
+            background-color: #ffffff;
+            border: 2px solid var(--primary-light);
+            border-radius: var(--radius-lg);
+            padding: 2.2rem;
+            margin: 2.5rem 0;
+            box-shadow: var(--shadow-md);
+        }
+
+        .calculator-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .calculator-header h3 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-field label {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-field select,
+        .form-field input {
+            padding: 0.75rem 0.9rem;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            background-color: #fcfcfd;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-field select:focus,
+        .form-field input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+            background-color: #ffffff;
+        }
+
+        .btn-submit {
+            display: inline-block;
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 1.05rem;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            text-align: center;
+            width: 100%;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-submit:active {
+            transform: translateY(1px);
+        }
+
+        .info-callout {
+            background-color: var(--secondary-light);
+            border-left: 4px solid var(--secondary);
+            padding: 1.25rem 1.5rem;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            margin: 1.5rem 0;
+        }
+
+        .info-callout h4 {
+            color: var(--secondary);
+            margin-top: 0;
+        }
+
+        .external-sources {
+            background-color: #f8fafc;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .external-sources ul {
+            list-style: none;
+            margin: 0.5rem 0 0 0;
+        }
+
+        .external-sources li {
+            margin-bottom: 0.75rem;
+        }
+
+        .external-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .external-link:hover {
+            text-decoration: underline;
+            color: var(--primary-hover);
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .faq-question {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .faq-answer {
+            color: var(--text-body);
+            font-size: 1rem;
+        }
+
+        footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            padding: 3rem 1.5rem;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            border-top: 1px solid #1e293b;
+        }
+
+        .footer-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-legal {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.7rem;
+            }
+            article {
+                padding: 2rem 1.25rem;
+            }
+            h2 {
+                font-size: 1.45rem;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <h1>광양이사 전문 비교견적 및 2027 포장이사 요금 안내</h1>
+            <p>전라남도 광양시 중마동, 광양읍, 성황도이지구, 와우지구 등 아파트, 빌라, 원룸 주거 이동을 위한 정직한 비용 분석과 최적화된 업체 선별 정보</p>
+        </div>
+    </header>
+
+    <nav aria-label="주요 목차 탐색">
+        <ul>
+            <li><a href="#지역특징">광양 지역 특성</a></li>
+            <li><a href="#서비스비교">이사 종류 및 차이점</a></li>
+            <li><a href="#요금표">2027 예상 요금표</a></li>
+            <li><a href="#절약전략">견적 절약 및 계약 팁</a></li>
+            <li><a href="#견적계산기">실시간 견적 계산기</a></li>
+            <li><a href="#자주묻는질문">자주 묻는 질문 FAQ</a></li>
+            <li><a href="#신뢰사이트">공식 참고 사이트</a></li>
+        </ul>
     </nav>
+
     <main>
-      <h1>Home page</h1>
+        <article>
+            <section id="소개">
+                <h2>광양이사, 전문 비교 분석이 필요한 이유</h2>
+                <div class="summary-box">
+                    <strong>광양이사 핵심 요약</strong>: 전라남도 광양시는 포스코 광양제철소 및 광양항 배후단지를 중심으로 형성된 동광양권(중마동, 금호동, 광영동, 골약동)과 유서 깊은 행정 및 주거 거점인 서광양권(광양읍, 봉강면, 옥룡면)으로 생활권이 뚜렷하게 나뉩니다. 성황도이지구, 와우지구, 목성지구 등 신규 아파트 단지의 대규모 입주와 더불어 직장인 전입, 공공기관 및 사무실 이전이 지속적으로 발생하므로 정확한 현장 파악과 세부 조건 비교가 비용 절감의 핵심입니다.
+                </div>
+                <p>
+                    새로운 보금자리로 이동하는 과정에서 가장 큰 고민은 바로 <strong>광양이사</strong>를 진행할 때 신뢰할 만한 이사짐센터를 어떻게 찾고, 합리적인 금액으로 계약을 체결하느냐에 있습니다. 운송 환경과 주거 형태에 따라 1톤 용달이사부터 2.5톤, 5톤 이상의 대형 포장이사까지 작업 방식이 완전히 달라집니다. 특히 최근에는 제철소 협력업체 및 관련 산업 단지의 순환 보직, 신축 아파트 단지 입주 등으로 인해 연중 수요가 꾸준히 이어지고 있습니다.
+                </p>
+                <p>
+                    많은 소비자들이 단순한 최저가 광고 문구에 이끌려 무허가 업체를 선택했다가, 이사 당일 작업 인원 축소, 식대 및 사다리차 명목의 추가 요금 청구, 혹은 고가 가전이나 가구 파손 시 적재물 배상보험 미가입으로 인한 피해를 겪기도 합니다. 따라서 객관적인 데이터와 투명한 요금 등급표를 확인하고, 공인 허가 등록증을 보유한 전문 업체를 통하여 다이렉트 견적을 교차 검증하는 과정이 반드시 선행되어야 합니다.
+                </p>
+
+                <div class="tag-cloud" aria-label="광양 관련 주요 검색 키워드 모음">
+                    <span>광양이사</span>
+                    <span>광양포장이사</span>
+                    <span>중마동이사</span>
+                    <span>광양읍이사짐센터</span>
+                    <span>성황지구포장이사</span>
+                    <span>와우지구아파트이사</span>
+                    <span>광양원룸이사</span>
+                    <span>광양오피스텔이사</span>
+                    <span>광양사무실이사</span>
+                    <span>광양용달이사</span>
+                    <span>이사비용계산기</span>
+                    <span>광양보관이사</span>
+                    <span>손없는날비용</span>
+                    <span>사다리차요금표</span>
+                    <span>광양투룸이사</span>
+                    <span>단독주택이사</span>
+                </div>
+            </section>
+
+            <section id="지역특징">
+                <h2>광양 행정구역별 주거 특성과 이사 환경 분석</h2>
+                <p>
+                    광양시는 지리적 구조와 주택 양식이 동별로 큰 차이를 보입니다. 이러한 구역별 특성은 투입되는 차량 크기와 작업 방식, 그리고 최종 견적서의 예상 금액에 직결됩니다.
+                </p>
+                
+                <h3>1. 중마동 및 성황도이지구, 와우지구 (신도심 고층 아파트권)</h3>
+                <p>
+                    중마동(중동, 마동)은 광양시 인구의 상당수가 밀집된 핵심 상업 및 주거 권역입니다. 광양중마2차노르웨이숲, 중마진아리채, 호반베르디움 등 기존 대표 단지뿐 아니라 성황동 성황도이지구 푸르지오 더 퍼스트, 와우지구 LH 및 중흥S클래스 등 최신 준공 아파트들이 대거 분포하고 있습니다. 이들 고층 단지는 지하주차장 탑차 진입 높이(2.3m~2.7m) 제한 여부, 지상 공원화 구조로 인한 사다리차 거치 가능 구역, 그리고 단지 관리사무소의 승강기(엘리베이터) 사용 예약 규격과 이용료 납부 방식이 매우 중요합니다. 작업 전 관리사무소에 승강기 사용 신청을 사전에 진행해야 당일 혼선을 방지할 수 있습니다.
+                </p>
+
+                <h3>2. 광양읍 및 목성지구, 덕례리, 용강리 (구도심 및 신규 확장권)</h3>
+                <p>
+                    광양읍은 구산리, 칠성리, 읍내리, 인동리 중심의 유서 깊은 구도심과 목성지구 부영, 덕례리 수시아, 용강리 창덕에버빌 및 현대힐스테이트 등 대형 아파트 단지가 공존하는 형태를 띱니다. 구도심 지역은 좁은 골목길에 자리 잡은 다세대주택, 연립빌라, 단독주택이 많아 5톤 탑차가 대문 앞까지 직접 진입하지 못하는 경우가 빈번합니다. 이런 현장에서는 1톤 트럭 3~4대를 연계하여 짐을 옮겨 싣는 환적 작업이나 골목 안쪽까지 짐을 나르는 까대기(구루마 도보 운반) 공정이 추가되어 인건비 변동이 생길 수 있으므로, 방문 견적 단계에서 현장 진입 도로 폭을 정확히 실측해야 합니다.
+                </p>
+
+                <h3>3. 금호동, 광영동 및 농어촌 면 단위 지역</h3>
+                <p>
+                    포스코 광양제철소 주택단지가 위치한 금호동은 저층 및 중층 주공 단지 형태가 혼재되어 조경수 간섭에 따른 사다리차 작업 가능 여부를 면밀히 파악해야 합니다. 광영동은 경사로가 있는 빌라 및 상가주택 원룸이 혼재해 있어 주차 공간 확보가 필수입니다. 한편 옥곡면, 진상면, 진월면, 다압면, 봉강면, 옥룡면과 같은 전원주택 및 농어촌 지역은 마당 진입로 비포장 여부, 전깃줄 높이, 작업 동선의 거리를 사전에 고지해야 사다리차나 대형 화물차의 안전한 진입이 보장됩니다.
+                </p>
+            </section>
+
+            <section id="서비스비교">
+                <h2>이사 서비스 종류별 장단점과 권장 대상</h2>
+                <p>
+                    이사의 종류는 화물의 양, 거주자의 포장 참여 여부, 정리수납 서비스의 수준에 따라 세분화됩니다. 각 방식의 장점과 단점을 정확히 이해하면 불필요한 과다 지출을 차단할 수 있습니다.
+                </p>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>구분</th>
+                                <th>작업 범위 및 특징</th>
+                                <th>장점</th>
+                                <th>단점 및 유의사항</th>
+                                <th>적합한 고객</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>포장이사 (표준)</strong></td>
+                                <td>업체에서 포장, 운송, 가구 조립, 덧신 착용 후 기본 바닥 청소 및 가구배치까지 일괄 전담</td>
+                                <td>시간과 체력 소모가 가장 적고 파손 책임 소재가 명확함</td>
+                                <td>비용이 가장 높으며, 고가품이나 귀중품은 자택 분실 대비 직접 소지 필요</td>
+                                <td>20평대 이상 아파트, 3~4인 가족, 영유아 가정, 맞벌이 부부</td>
+                            </tr>
+                            <tr>
+                                <td><strong>반포장이사</strong></td>
+                                <td>포장은 업체와 소비자가 공동으로 진행하며, 도착지에서는 대형 가전·가구만 배치하고 잔짐은 고객이 직접 정리</td>
+                                <td>포장이사 대비 평균 20~30% 비용 절감 가능</td>
+                                <td>도착 후 잔짐을 정리하는 데 며칠간 시간과 노력이 소요됨</td>
+                                <td>투룸, 15~20평형 거주자, 짐량이 적은 신혼부부, 시간적 여유가 있는 1~2인 가구</td>
+                            </tr>
+                            <tr>
+                                <td><strong>용달이사 (원룸)</strong></td>
+                                <td>1톤 트럭 기반 운송 중심 서비스. 고객이 사전 박스 포장을 완료한 뒤 단순 운반 또는 상하차 지원</td>
+                                <td>가장 저렴한 가격, 소형 짐에 최적화된 경제적 구조</td>
+                                <td>포장 박스 대여가 어렵고 대형 가전 파손 위험도가 상승할 수 있음</td>
+                                <td>오피스텔, 원룸 거주 청년층, 대학생, 직장인 독신 가구 (10평 이하)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>보관이사</strong></td>
+                                <td>인테리어 공사나 입주 날짜 불일치로 이삿짐을 전용 컨테이너에 1주~수개월간 임시 보관 후 재운송</td>
+                                <td>주거 공백기 발생 시 안전하게 물품을 보관할 수 있음</td>
+                                <td>상하차 작업이 2회 발생하여 이사 비용이 2배 수준으로 증가하며 보관료 별도</td>
+                                <td>신축 아파트 입주 지연, 리모델링 공사 진행 세대</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info-callout">
+                    <h4>가장 합리적인 선택을 위한 팁</h4>
+                    <p>
+                        직접 정리 정돈을 꼼꼼하게 진행하는 성향이라면 반포장이사가 훌륭한 대안이 됩니다. 그러나 냉장고 음식물 아이스박스 냉장 패킹, 옷걸이 의류 전용 행거 박스 포장, 주방 식기류 에어캡 완충 포장까지 전문가의 손길을 원한다면 일반적인 가정집 기준으로는 포장이사를 선택하는 것이 시간적, 육체적 기회비용을 절약하는 가장 현명한 방법입니다.
+                    </p>
+                </div>
+            </section>
+
+            <section id="요금표">
+                <h2>2027년 광양이사 표준 요금표 및 평형별 예상 비용</h2>
+                <p>
+                    이사 견적은 단순 면적이 아닌 적재 물량(톤수), 작업 인원 구성(남성 전문 패커, 주방 전문 헬퍼), 이동 거리, 사다리차 사용 층수, 손 없는 날 프리미엄에 따라 산정됩니다. 다음은 광양 시내 이동 기준 2027년도 평균 예상 요금표입니다.
+                </p>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>주거 면적 / 평형대</th>
+                                <th>차량 톤수 기준</th>
+                                <th>전문 작업 인력</th>
+                                <th>평균 예상 견적 금액</th>
+                                <th>사다리차 비용 (편도 기준)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>소형 원룸 (10평 이하)</strong></td>
+                                <td>1톤 탑차 1대</td>
+                                <td>기사 1인 (운송+동반작업)</td>
+                                <td>300,000원 ~ 450,000원</td>
+                                <td>저층 9만~11만 원 (필요시)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>투룸 / 소형 빌라 (12~18평)</strong></td>
+                                <td>1톤 2대 또는 2.5톤 1대</td>
+                                <td>남성 2인</td>
+                                <td>650,000원 ~ 850,000원</td>
+                                <td>11만~13만 원</td>
+                            </tr>
+                            <tr>
+                                <td><strong>아파트 20~24평형</strong></td>
+                                <td>5톤 단독 탑차</td>
+                                <td>남성 3인 + 여성 1인 (주방)</td>
+                                <td>950,000원 ~ 1,250,000원</td>
+                                <td>14만~17만 원 (중층 기준)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>아파트 30~34평형</strong></td>
+                                <td>5톤 탑차 + 1톤 추가 (6톤)</td>
+                                <td>남성 3~4인 + 여성 1인</td>
+                                <td>1,300,000원 ~ 1,650,000원</td>
+                                <td>16만~20만 원</td>
+                            </tr>
+                            <tr>
+                                <td><strong>대형 평형 (40~50평대 이상)</strong></td>
+                                <td>6톤 ~ 7.5톤 이상</td>
+                                <td>남성 4인 이상 + 여성 1~2인</td>
+                                <td>1,800,000원 ~ 2,500,000원 이상</td>
+                                <td>20만~28만 원 (고층 구간)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>비용에 직접적인 영향을 미치는 4가지 가산 요율</h3>
+                <ol>
+                    <li><strong>손 없는 날 및 월말 프리미엄</strong>: 음력 9일, 10일, 19일, 20일, 29일, 30일에 해당하는 손 없는 날이나 매달 25일 이후 월말, 그리고 금요일과 토요일은 수요가 폭증하여 평일 대비 약 20만 원에서 40만 원의 추가 할증 요금이 책정됩니다.</li>
+                    <li><strong>사다리차 vs 엘리베이터 이용료</strong>: 사다리차를 이용할 수 없는 복도식 구조이거나 단지 조경상 차량 진입이 불가한 경우 엘리베이터로 작업해야 합니다. 이때 관리사무소에 지불하는 승강기 사용료(약 10만~25만 원)와 보양재 설치비, 그리고 수작업 인건비가 별도로 책정될 수 있습니다.</li>
+                    <li><strong>특수 가전 및 부대 이전 작업</strong>: 벽걸이 TV 무타공 브라켓 시공, 천장형 및 스탠드 에어컨 철거 및 동관 연장 설치, 대형 드럼세탁기·건조기 직렬 키트 설치, 붙박이장 분해 조립, 피아노 및 대형 금고 운반 등은 별도의 기술 공임비가 발생합니다.</li>
+                    <li><strong>장거리 운송 거리 요금</strong>: 광양 시내(예: 광양읍에서 중마동) 이동이 아닌 여수, 순천, 진주, 광주, 수도권 등 시외 지역으로 이동할 경우 고속도로 통행료, 유류비, 이동 시간에 따른 장거리 차등 요율이 부가됩니다.</li>
+                </ol>
+            </section>
+
+            <section id="절약전략">
+                <h2>광양이사 최저가 달성을 위한 100% 절약 팁과 계약 수칙</h2>
+                <p>
+                    동일한 짐량이라 하더라도 어떻게 준비하고 계약하느냐에 따라 최종 청구 비용에서 수십만 원의 차이를 만들 수 있습니다. 알뜰한 소비를 위해 다음의 실전 전략을 권장합니다.
+                </p>
+
+                <h3>1. 불필요한 물품 사전 폐기와 톤수 감량</h3>
+                <p>
+                    이사 비용의 절대적인 기준은 트럭의 톤수입니다. 5톤 탑차 한 대로 끝날 물량이 버리지 않은 낡은 가구 몇 점 때문에 6톤 혹은 1톤 트럭 1대를 추가해야 하는 상황(15만~25만 원 추가)으로 이어질 수 있습니다. 광양시 대형폐기물 스티커를 발급받거나 중고거래 사이트, 나눔 커뮤니티를 통해 1~2개월 전부터 미리 잔짐을 덜어내어 적재 중량을 낮추는 것이 가장 강력한 절약법입니다.
+                </p>
+
+                <h3>2. 커뮤니티 내돈내산 후기 및 평판 검증</h3>
+                <p>
+                    보배드림, 에펨코리아(펨코), 디시인사이드 부동산/자취 갤러리 등 유명 온라인 커뮤니티의 실사용자 내돈내산 후기를 살펴보면, 과장 광고를 일삼는 프랜차이즈 브랜드보다 지역 내에서 10년 이상 단골을 보유한 광양 토박이 전문 업체의 현장 마무리가 훨씬 우수하다는 평가를 자주 접할 수 있습니다. 무조건 이름값에만 의존하지 말고 실제 광양 주부 카페나 지역 커뮤니티의 솔직한 평판을 조회해 보아야 합니다.
+                </p>
+
+                <h3>3. 인터넷 결합 프로모션 및 연계 혜택 활용</h3>
+                <p>
+                    이사 시점은 통상 초고속 인터넷 및 IPTV의 3년 약정이 만료되는 시기와 일치하는 경우가 많습니다. 통신사를 신규 가입하거나 재약정하면서 제공받는 현금지원 혜택, 상품권 사은품 프로모션을 영리하게 매칭하면 이사 당일 지출되는 비용의 상당 부분을 실질적으로 보전받을 수 있습니다. 단, 무약정인지 12개월(1년) 약정인지 위약금 발생 여부를 반드시 고객센터 전화번호를 통해 사전 확인해야 합니다.
+                </p>
+
+                <h3>4. 정식 관허업체 확인 및 서면 계약서 필수 작성</h3>
+                <p>
+                    운송주선사업 허가증(적재물 배상책임보험 의무 가입)이 있는 업체인지를 전국화물자동차운송주선사업연합회 등을 통해 확인하십시오. 계약 시에는 구두 약속이 아닌 공식 서면 계약서를 작성해야 하며, 당일 식대 및 수고비 요구 금지 조항, 작업 인원수(외국인 비숙련 인력 포함 여부), 사다리차 불포함 여부, 계약금과 파손 시 환불 및 보상 처리 기준을 특약란에 명시해야 위약금 분쟁을 원천 차단할 수 있습니다.
+                </p>
+            </section>
+
+            <section id="견적계산기">
+                <h2>광양이사 실시간 맞춤 예상 견적 계산기</h2>
+                <p>
+                    출발지와 도착지 환경 및 평형대를 입력하시면 대략적인 예상 톤수와 산정 기준을 사전에 가늠해보실 수 있습니다.
+                </p>
+
+                <div class="calculator-card">
+                    <div class="calculator-header">
+                        <h3>스마트 비용 산출 및 전문 상담 신청</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0;">원하시는 이동 조건을 선택하시면 공인된 최적의 맞춤형 가이드라인을 제공합니다.</p>
+                    </div>
+
+                    <form action="#" method="post" onsubmit="alert('광양이사 맞춤 견적 데이터가 성공적으로 접수되었습니다. 담당 전문 매니저가 영업시간 내에 순차적으로 표준 요금 안내를 지원합니다.'); return false;">
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label for="start_loc">출발지 (광양시 내 권역)</label>
+                                <select id="start_loc" name="start_loc" required>
+                                    <option value="">출발 구역 선택</option>
+                                    <option value="중마동">중마동 (중동/마동)</option>
+                                    <option value="광양읍">광양읍 (구도심/목성/덕례/용강)</option>
+                                    <option value="성황동">성황동 (성황도이지구)</option>
+                                    <option value="와우지구">와우지구</option>
+                                    <option value="금호동">금호동 (제철주택단지)</option>
+                                    <option value="광영동">광영동</option>
+                                    <option value="기타면">기타 면단위 (옥곡/진상/진월 등)</option>
+                                    <option value="시외">타지역 (순천/여수/타시도)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="end_loc">도착지 (광양시 내 권역)</label>
+                                <select id="end_loc" name="end_loc" required>
+                                    <option value="">도착 구역 선택</option>
+                                    <option value="중마동">중마동 (중동/마동)</option>
+                                    <option value="광양읍">광양읍 (구도심/목성/덕례/용강)</option>
+                                    <option value="성황동">성황동 (성황도이지구)</option>
+                                    <option value="와우지구">와우지구</option>
+                                    <option value="금호동">금호동 (제철주택단지)</option>
+                                    <option value="광영동">광영동</option>
+                                    <option value="기타면">기타 면단위 (옥곡/진상/진월 등)</option>
+                                    <option value="시외">타지역 (순천/여수/타시도)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="house_type">주거 형태</label>
+                                <select id="house_type" name="house_type" required>
+                                    <option value="">주거 유형 선택</option>
+                                    <option value="아파트">아파트</option>
+                                    <option value="오피스텔">오피스텔</option>
+                                    <option value="빌라">빌라 / 연립 / 다세대</option>
+                                    <option value="단독주택">단독주택 / 전원주택</option>
+                                    <option value="원룸투룸">원룸 / 투룸</option>
+                                    <option value="사무실">사무실 / 상가</option>
+                                </select>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="house_size">면적 및 평형대</label>
+                                <select id="house_size" name="house_size" required>
+                                    <option value="">평형대 선택</option>
+                                    <option value="10">10평 이하 (원룸/소형)</option>
+                                    <option value="15">15평형 내외 (투룸)</option>
+                                    <option value="24">20~25평형 (소형 아파트)</option>
+                                    <option value="34">30~35평형 (국민 평형)</option>
+                                    <option value="45">40평형 이상 (중대형)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="service_kind">희망 이사 종류</label>
+                                <select id="service_kind" name="service_kind" required>
+                                    <option value="포장이사">포장이사 (표준 종합형)</option>
+                                    <option value="반포장이사">반포장이사 (실속형)</option>
+                                    <option value="용달이사">용달이사 (단순 소형)</option>
+                                    <option value="보관이사">보관이사 (임시 컨테이너)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="user_contact">상담 안내 연락처</label>
+                                <input type="tel" id="user_contact" name="user_contact" placeholder="휴대폰 번호 (- 제외 입력)" required pattern="[0-9]{10,11}">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-submit">광양이사 최적 견적 및 할인 분석 요청</button>
+                    </form>
+                </div>
+            </section>
+
+            <section id="자주묻는질문">
+                <h2>광양이사 관련 자주 묻는 질문 FAQ</h2>
+                <div class="faq-item">
+                    <div class="faq-question">방문 견적은 왜 필수적으로 받아야 하나요?</div>
+                    <div class="faq-answer">
+                        전화나 앱으로만 대략적인 짐량을 듣고 계약할 경우, 현장에 도착했을 때 가구 장롱 내부 잔짐, 베란다 창고 물품, 장독대, 화분 등 누락된 짐으로 인해 당일 톤수 추가 비용이 발생할 가능성이 매우 높습니다. 관허 업체의 전문 직원이 직접 방문하여 진입로, 사다리차 진입 공간, 가전 분해 여부를 눈으로 확인하고 확정 견적서를 발행해야 상호 분쟁이 전혀 없습니다. 대부분의 정규 업체는 무료 방문 견적을 원칙으로 운영합니다.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">사다리차 사용과 엘리베이터 이용 중 무엇이 더 저렴하고 안전한가요?</div>
+                    <div class="faq-answer">
+                        사다리차는 베란다 창을 통해 직접 대형 짐을 빠르게 내릴 수 있어 작업 시간이 2시간 이상 단축되며 가구 흠집 발생 확률이 크게 줄어듭니다. 비용 측면에서는 10층 미만의 경우 사다리차 비용과 고층 아파트 엘리베이터 사용료(보양비 포함)가 유사하지만, 15층 이상 고층은 엘리베이터 이용료가 사다리차보다 저렴할 수 있습니다. 단, 엘리베이터 이용 시 작업 속도 저하에 따른 인건비 추가 여부를 함께 대조해야 합니다.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">이사 도중 물품이 파손되거나 분실되면 어떻게 구제받나요?</div>
+                    <div class="faq-answer">
+                        작업 완료 직후 작업 팀장이 철수하기 전 현장에서 파손 여부를 즉시 확인하고, 파손된 부위 사진과 영상을 다각도로 촬영한 후 서면 확인서에 팀장의 자필 서명을 받아야 합니다. 정식 허가 업체는 적재물 배상책임보험에 가입되어 있어 보험 접수를 통해 감가상각 및 수리비를 보상받을 수 있습니다. 무허가 용달의 경우 보상 회피가 빈번하므로 계약 전 보험 증권 사본 확인이 중요합니다.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">최근 생성형 AI(챗지피티, 제미나이 등)를 활용한 이사 준비는 어떻게 하나요?</div>
+                    <div class="faq-answer">
+                        생성형 AI 모델에 본인의 주거 평형, 가전 목록, 출발지와 도착지 층수를 입력하면 실시간으로 필요한 박스 수량 추정, 공과금 정산 체크리스트, 전입신고 및 확정일자 부여 절차를 일목요연하게 시간대별 타임라인으로 생성할 수 있습니다. 카카오톡이나 토스 앱을 통해서는 이사 당일 아파트 관리비 자동 정산 및 보증금 반환 알림 서비스를 연계하여 간편하게 일정을 관리할 수 있습니다.
+                    </div>
+                </div>
+            </section>
+
+            <section id="신뢰사이트">
+                <h2>공식 검증 및 외부 신뢰 사이트 안내</h2>
+                <p>
+                    이사 전후 행정 절차 및 안전한 화물 운송 거래를 확인하기 위해 국가 기관 및 공신력 있는 포털의 정보를 직접 대조해 보실 수 있습니다.
+                </p>
+                <div class="external-sources">
+                    <ul>
+                        <li>
+                            <a href="https://www.gwangyang.go.kr" target="_blank" rel="noopener noreferrer" class="external-link">광양시청 공식 웹사이트 (gwangyang.go.kr)</a>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">전입 신고, 대형 폐기물 배출 스티커 인터넷 신청 및 지역 내 생활 민원 정보 확인</p>
+                        </li>
+                        <li>
+                            <a href="https://www.kca.go.kr" target="_blank" rel="noopener noreferrer" class="external-link">한국소비자원 공식 포털 (kca.go.kr)</a>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">포장이사 소비자 피해 예방 주의보, 표준 약관 해설 및 분쟁 조정 절차 안내</p>
+                        </li>
+                        <li>
+                            <a href="https://namu.wiki/w/%EA%B4%91%EC%96%91%EC%8B%9C" target="_blank" rel="noopener noreferrer" class="external-link">나무위키 광양시 행정 및 지리 정보</a>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0;">광양시 동별 인구 분포, 도로 교통망 현황 및 신규 택지 개발 지구 상세 개요</p>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </article>
     </main>
-  </body>
-</html>
+
+  
